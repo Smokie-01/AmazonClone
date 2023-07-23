@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:country_picker/country_picker.dart';
+import 'package:e_commerce_apk/controller/services/auth_services/auth_services.dart';
+import 'package:e_commerce_apk/view/auth_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce_apk/constants/common_function.dart';
 import 'package:e_commerce_apk/utils/colors.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -217,17 +220,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ],
           ),
           CommonFunction.blankSpace(height * 0.02, 0),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                fixedSize: Size(width * .68, height * .06),
-                backgroundColor: amber),
-            child: Text(
-              "Continue",
-              style:
-                  textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
+          CommonAuthButton(title: "Continue", onPressed: (){
+            AuthServices.receiveOTP(context: context, mobileNo: '$currentCountryCode${mobileNoController.text.trim()}');
+            Navigator.push(context, PageTransition(child: OTPScreen(mobileNumber:' ${mobileNoController.text}' ), type: PageTransitionType.leftToRight ));
+          }),
           CommonFunction.blankSpace(height * 0.02, 0),
           RichText(
             textAlign: TextAlign.center,
@@ -461,7 +457,7 @@ class CommonAuthButton extends StatelessWidget {
     required this.onPressed
   }) : super(key: key);
 final String title;
-VoidCallback onPressed;
+final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
