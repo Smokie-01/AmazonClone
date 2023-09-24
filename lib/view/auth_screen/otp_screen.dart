@@ -5,8 +5,8 @@ import 'package:e_commerce_apk/view/auth_screen/auth_screen.dart';
 import 'package:flutter/material.dart';
 
 class OTPScreen extends StatefulWidget {
-  OTPScreen({required this.mobileNumber});
-  String mobileNumber;
+  const OTPScreen({super.key, required this.mobileNumber});
+  final String mobileNumber;
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -60,6 +60,7 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               CommonFunction.blankSpace(height * .02, 0),
               TextField(
+                keyboardType: TextInputType.number,
                 controller: optController,
                 decoration: InputDecoration(
                   // Customize the appearance of the border

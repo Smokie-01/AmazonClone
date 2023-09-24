@@ -1,11 +1,12 @@
+import 'package:e_commerce_apk/controller/provider/address_provider.dart';
 import 'package:e_commerce_apk/controller/provider/auth_provider/auth_provider.dart';
+import 'package:e_commerce_apk/controller/provider/product_provider/product_provider.dart';
 import 'package:e_commerce_apk/firebase_options.dart';
 import 'package:e_commerce_apk/utils/theme.dart';
-import 'package:e_commerce_apk/view/auth_screen/auth_screen.dart';
-import 'package:e_commerce_apk/view/auth_screen/otp_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'controller/services/auth_services/sign_In_logic.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +20,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(
+          create: (_) => AuthProvider(),
+        ),
+        ChangeNotifierProvider<AddressProvider>(
+            create: (_) => AddressProvider()),
+        ChangeNotifierProvider<SellerProductProviderc>(
+            create: (_) => SellerProductProviderc()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: theme,
-        home: const AuthScreen(),
+        // home: const SellerPresistantNavBar(),
+        home: const SignInLogic(),
+        // home: const SellerPresistantNavBar(),
       ),
     );
   }

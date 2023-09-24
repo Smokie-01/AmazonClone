@@ -86,8 +86,6 @@ class _AuthScreenState extends State<AuthScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(
-                vertical: height * .02, horizontal: width * .03),
             decoration: BoxDecoration(color: greyShade2),
             height: height * .07,
             child: Row(
@@ -99,6 +97,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     });
                   },
                   child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: width*.03),
                     height: height * .05,
                     width: width * .05,
                     decoration: BoxDecoration(
@@ -114,12 +113,12 @@ class _AuthScreenState extends State<AuthScreen> {
                     text: TextSpan(children: [
                   TextSpan(
                       text: "  Create Account. ",
-                      style: textTheme.bodyLarge!
+                      style: textTheme.bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold)),
                   TextSpan(
                       text: "New to Amazon?",
-                      style: textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold)),
+                      style: textTheme.bodySmall!
+                          .copyWith(fontWeight: FontWeight.w600)),
                 ]))
               ],
             ),
@@ -153,11 +152,11 @@ class _AuthScreenState extends State<AuthScreen> {
                     text: TextSpan(children: [
                   TextSpan(
                       text: "  Sign in. ",
-                      style: textTheme.bodyLarge!
+                      style: textTheme.bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold)),
                   TextSpan(
                       text: "Already a customer.",
-                      style: textTheme.bodyMedium!
+                      style: textTheme.bodySmall!
                           .copyWith(fontWeight: FontWeight.bold)),
                 ]))
               ],
@@ -179,7 +178,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(left: width * .03),
+                  margin: EdgeInsets.only(left: width * .02),
                   height: height * .06,
                   width: width * .16,
                   decoration: BoxDecoration(
@@ -191,7 +190,7 @@ class _AuthScreenState extends State<AuthScreen> {
               Padding(
                 padding: EdgeInsets.only(right: width * .01),
                 child: SizedBox(
-                  height: height * .06,
+                  height: height * .07,
                   width: width * .70,
                   child: TextFormField(
                     decoration: InputDecoration(
@@ -258,16 +257,17 @@ class _AuthScreenState extends State<AuthScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: width * .03),
+            padding: EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(border: Border.all(color: greyShade3)),
             height: height * .07,
+           width: width*1,
             child: Row(
               children: [
                 InkWell(
                   onTap: () {
                     setState(() {
                       inLogin =! inLogin;
-                      print("unTapped");
+                     
                     });
                   },
                   child: Container(
@@ -297,9 +297,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
           CommonFunction.blankSpace(height * .01, 0),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * .02),
+          SizedBox(
+            width: width*.85,
             child: TextField(
+               
               controller: nameController,
               decoration: InputDecoration(
                 // Customize the appearance of the border
@@ -327,7 +328,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
             ),
           ),
-          CommonFunction.blankSpace(height * .01, 0),
+         CommonFunction.blankSpace(height * .01, 0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -352,33 +353,30 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Text(currentCountryCode),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(right: width * .01),
-                child: SizedBox(
-                  height: height * .06,
-                  width: width * .70,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: grey),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: grey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: const BorderSide(color: secondaryColor),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: grey),
-                      ),
+              SizedBox(
+                height: height * .06,
+                width: width * .69,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(color: grey),
                     ),
-                    keyboardType: TextInputType.phone,
-                    controller: mobileNoController,
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(color: grey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: secondaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(color: grey),
+                    ),
                   ),
+                  keyboardType: TextInputType.phone,
+                  controller: mobileNoController,
                 ),
               )
             ],
@@ -403,6 +401,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ],
             ),
           ),
+           CommonFunction.blankSpace(height * .01, 0),
           Container(
             width: width,
             padding: EdgeInsets.symmetric(
@@ -414,7 +413,6 @@ class _AuthScreenState extends State<AuthScreen> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      print("tappped");
                       inLogin = true;
                     });
                   },
