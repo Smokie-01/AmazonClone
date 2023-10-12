@@ -1,11 +1,14 @@
 import 'package:e_commerce_apk/controller/provider/address_provider.dart';
 import 'package:e_commerce_apk/controller/provider/auth_provider/auth_provider.dart';
-import 'package:e_commerce_apk/controller/provider/product_provider/product_provider.dart';
+import 'package:e_commerce_apk/controller/provider/deal_of_the_provider/deal_of_the_provider.dart';
+import 'package:e_commerce_apk/controller/provider/product_by_category_provider/product_by_category_provider.dart';
+import 'package:e_commerce_apk/controller/provider/user_product_provider/user_product_provider.dart';
 import 'package:e_commerce_apk/firebase_options.dart';
 import 'package:e_commerce_apk/utils/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'controller/provider/product_provider/product_provider.dart';
 import 'controller/services/auth_services/sign_In_logic.dart';
 
 Future main() async {
@@ -26,8 +29,16 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AddressProvider>(
             create: (_) => AddressProvider()),
-        ChangeNotifierProvider<SellerProductProviderc>(
-            create: (_) => SellerProductProviderc()),
+        ChangeNotifierProvider<SellerProductProvider>(
+            create: (_) => SellerProductProvider()),
+        ChangeNotifierProvider<UserProductProvider>(
+            create: (_) => UserProductProvider()),
+        ChangeNotifierProvider<DealOFTheDayProvider>(
+          create: (_) => DealOFTheDayProvider(),
+        ),
+        ChangeNotifierProvider<ProductByCategoryProvider>(
+          create: (_) => ProductByCategoryProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

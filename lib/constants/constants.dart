@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-const String keySecret = '<Razorpay Key Secrets>';
-const String keyID = '<Razorpay Key ID>';
-
 FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+String keyID = "rzp_test_px2un8wgq16u2H";
+String keySecret = "E52UIQayX1yC0n4SXzBFaLL7";
 
 List<String> categories = [
   'Prime',

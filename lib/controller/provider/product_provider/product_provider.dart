@@ -18,7 +18,6 @@ class SellerProductProvider extends ChangeNotifier {
   updateProductImageUrl(
       {required List<String> imageURLs, required BuildContext context}) async {
     productImagesURL = imageURLs;
-    log("the images reached provider ${productImagesURL}");
     notifyListeners();
   }
 

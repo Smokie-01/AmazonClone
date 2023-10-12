@@ -8,6 +8,7 @@ import 'package:e_commerce_apk/constants/common_function.dart';
 import 'package:e_commerce_apk/constants/constants.dart';
 import 'package:e_commerce_apk/controller/provider/product_provider/product_provider.dart';
 import 'package:e_commerce_apk/model/product_model.dart';
+import 'package:e_commerce_apk/model/user_product_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -83,6 +84,7 @@ class ProductServices {
 
   static Future getSellersProduct() async {
     List<ProductModel> sellerProducts = [];
+
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
           .collection("Products")
@@ -98,5 +100,29 @@ class ProductServices {
       log(e.toString());
     }
     return sellerProducts;
+  }
+
+  static Future addSalesData(
+      {required BuildContext context,
+      required String userId,
+      required UserProductModel productmodel}) async {
+    try {
+      Uuid uuid = const Uuid();
+
+      await firestore
+          .collection("productSalesData")
+          .doc(productmodel.productID)
+          .collection("purshase_history")
+          .doc(userId + uuid.v1())
+          .set(productmodel.toMap())
+          .whenComplete(() {
+        log("data added");
+
+        CommonFunction.showSuccessToast(
+            context: context, message: "Product Added Succesfully");
+      });
+    } on Exception catch (e) {
+      CommonFunction.showErrorToast(context: context, message: e.toString());
+    }
   }
 }

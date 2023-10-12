@@ -93,11 +93,11 @@ class _AuthScreenState extends State<AuthScreen> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      inLogin =! inLogin;
+                      inLogin = !inLogin;
                     });
                   },
                   child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: width*.03),
+                    margin: EdgeInsets.symmetric(horizontal: width * .03),
                     height: height * .05,
                     width: width * .05,
                     decoration: BoxDecoration(
@@ -219,17 +219,27 @@ class _AuthScreenState extends State<AuthScreen> {
             ],
           ),
           CommonFunction.blankSpace(height * 0.02, 0),
-          CommonAuthButton(title: "Continue", onPressed: (){
-            AuthServices.receiveOTP(context: context, mobileNo: '$currentCountryCode${mobileNoController.text.trim()}');
-            Navigator.push(context, PageTransition(child: OTPScreen(mobileNumber:' ${mobileNoController.text}' ), type: PageTransitionType.leftToRight ));
-          }),
+          CommonAuthButton(
+              title: "Continue",
+              onPressed: () {
+                AuthServices.receiveOTP(
+                    context: context,
+                    mobileNo:
+                        '$currentCountryCode${mobileNoController.text.trim()}');
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: OTPScreen(
+                            mobileNumber: ' ${mobileNoController.text}'),
+                        type: PageTransitionType.leftToRight));
+              }),
           CommonFunction.blankSpace(height * 0.02, 0),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
               children: [
                 TextSpan(
-                    text: "By continue you agree to Amazon'\s ",
+                    text: "By continue you agree to Amazon' ",
                     style: textTheme.labelMedium),
                 TextSpan(
                     text: "conditon of use ",
@@ -257,17 +267,16 @@ class _AuthScreenState extends State<AuthScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(border: Border.all(color: greyShade3)),
             height: height * .07,
-           width: width*1,
+            width: width * 1,
             child: Row(
               children: [
                 InkWell(
                   onTap: () {
                     setState(() {
-                      inLogin =! inLogin;
-                     
+                      inLogin = !inLogin;
                     });
                   },
                   child: Container(
@@ -278,7 +287,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Icon(
                       size: 12,
                       Icons.circle,
-                      color: inLogin ?  transparent :secondaryColor ,
+                      color: inLogin ? transparent : secondaryColor,
                     ),
                   ),
                 ),
@@ -298,15 +307,14 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
           CommonFunction.blankSpace(height * .01, 0),
           SizedBox(
-            width: width*.85,
+            width: width * .85,
             child: TextField(
-               
               controller: nameController,
               decoration: InputDecoration(
                 // Customize the appearance of the border
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
-                  borderSide: const  BorderSide(color: Colors.blue),
+                  borderSide: const BorderSide(color: Colors.blue),
                 ),
                 // Customize the appearance of the focused border
                 focusedBorder: OutlineInputBorder(
@@ -320,7 +328,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 hintText: 'John Doe',
                 hintStyle: const TextStyle(color: Colors.grey),
                 // Customize the appearance of the prefix icon (optional)
-                prefixIcon: const  Icon(
+                prefixIcon: const Icon(
                   Icons.person,
                   color: secondaryColor,
                 ),
@@ -328,7 +336,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
             ),
           ),
-         CommonFunction.blankSpace(height * .01, 0),
+          CommonFunction.blankSpace(height * .01, 0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -382,7 +390,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ],
           ),
           CommonFunction.blankSpace(height * 0.02, 0),
-          CommonAuthButton(title: 'Continue', onPressed: (){},),
+          CommonAuthButton(
+            title: 'Continue',
+            onPressed: () {},
+          ),
           CommonFunction.blankSpace(height * 0.02, 0),
           RichText(
             textAlign: TextAlign.center,
@@ -401,7 +412,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ],
             ),
           ),
-           CommonFunction.blankSpace(height * .01, 0),
+          CommonFunction.blankSpace(height * .01, 0),
           Container(
             width: width,
             padding: EdgeInsets.symmetric(
@@ -424,7 +435,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Icon(
                       size: 12,
                       Icons.circle,
-                      color: inLogin ?  secondaryColor: transparent ,
+                      color: inLogin ? secondaryColor : transparent,
                     ),
                   ),
                 ),
@@ -449,13 +460,11 @@ class _AuthScreenState extends State<AuthScreen> {
 }
 
 class CommonAuthButton extends StatelessWidget {
-  CommonAuthButton({
-    Key? key,
-    required this.title,
-    required this.onPressed
-  }) : super(key: key);
-final String title;
-final VoidCallback onPressed;
+  const CommonAuthButton(
+      {Key? key, required this.title, required this.onPressed})
+      : super(key: key);
+  final String title;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -464,12 +473,10 @@ final VoidCallback onPressed;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          fixedSize: Size(width * .68, height * .06),
-          backgroundColor: amber),
+          fixedSize: Size(width * .68, height * .06), backgroundColor: amber),
       child: Text(
         title,
-        style:
-            textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
+        style: textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
       ),
     );
   }

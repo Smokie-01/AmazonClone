@@ -31,14 +31,14 @@ class _SignInLogicState extends State<SignInLogic> {
         Navigator.pushReplacement(
             context,
             PageTransition(
-                child: UserBottomNavBar(),
+                child: const UserBottomNavBar(),
                 type: PageTransitionType.leftToRight));
       }
     } else {
       Navigator.push(
           context,
           PageTransition(
-              child: UserDataInputScreen(),
+              child: const UserDataInputScreen(),
               type: PageTransitionType.leftToRight));
     }
   }
@@ -67,8 +67,6 @@ class _SignInLogicState extends State<SignInLogic> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-    );
+    return Scaffold();
   }
 }

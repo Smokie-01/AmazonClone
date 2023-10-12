@@ -3,16 +3,18 @@ import 'package:e_commerce_apk/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductCommonTextField extends StatelessWidget {
-  const ProductCommonTextField({
-    Key? key,
-    required this.textController,
-    required this.hintText,
-    required this.textFieldLabel,
-  }) : super(key: key);
+  ProductCommonTextField(
+      {Key? key,
+      required this.textController,
+      required this.hintText,
+      required this.textFieldLabel,
+      this.textInputType})
+      : super(key: key);
 
   final TextEditingController textController;
   final String hintText;
   final String textFieldLabel;
+  TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {

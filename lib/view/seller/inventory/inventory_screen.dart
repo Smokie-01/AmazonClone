@@ -35,7 +35,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
           Navigator.push(
               context,
               PageTransition(
-                  child: AddProductScreen(),
+                  child: const AddProductScreen(),
                   type: PageTransitionType.leftToRight));
         },
         backgroundColor: amber,

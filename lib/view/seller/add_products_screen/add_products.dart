@@ -32,10 +32,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController countryOfOriginController = TextEditingController();
   TextEditingController productSpecificationsController =
       TextEditingController();
-
   TextEditingController productPriceController = TextEditingController();
   TextEditingController productIDController = TextEditingController();
   TextEditingController productSellerIDController = TextEditingController();
+  TextEditingController discountedProductPriceController =
+      TextEditingController();
   String? dropDownValue;
   bool addProductButtonIsPressesd = false;
   @override
@@ -63,6 +64,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
       Uuid uuid = const Uuid();
       String? sellerID = auth.currentUser!.phoneNumber;
       String productID = "$sellerID${uuid.v1().toString()}";
+      double discountAmount = double.parse(productPriceController.text.trim()) -
+          double.parse(discountedProductPriceController.text.trim());
+      double discountPercentage =
+          (discountAmount / double.parse(productPriceController.text.trim())) *
+              100;
       ProductModel productModel = ProductModel(
         imagesURL: imageURLs,
         name: productNameController.text.trim(),
@@ -74,8 +80,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
         specifications: productDescriptionController.text.trim(),
         price: double.parse(productPriceController.text.trim()),
         productID: productID,
+        discountedPrice:
+            double.parse(discountedProductPriceController.text.trim()),
         productSellerID: sellerID,
         inStock: true,
+        discountPercentage: int.parse(discountPercentage.toStringAsFixed(
+          0,
+        )),
+        uploadedAt: DateTime.now(),
       );
       await ProductServices.addProductToFirebase(
           productModel: productModel, context: context);
@@ -155,7 +167,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 Icons.add,
                                 color: greyShade3,
                               ),
-                              Text("Add Products")
+                              const Text("Add Products")
                             ],
                           ),
                         ),
@@ -222,6 +234,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   textController: productPriceController,
                   hintText: "Product Price",
                   textFieldLabel: "price"),
+              ProductCommonTextField(
+                textFieldLabel: "Discounted Price",
+                hintText: 'Discounted price',
+                textController: discountedProductPriceController,
+                textInputType: TextInputType.number,
+              ),
               CommonFunction.blankSpace(height * .02, 0),
               SizedBox(
                 width: width,
@@ -263,7 +281,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
           ),
           child: DropdownButton(
-            hint: Text("Select Category"),
+            hint: const Text("Select Category"),
             value: dropDownValue,
             underline: const SizedBox(),
             isExpanded: true,

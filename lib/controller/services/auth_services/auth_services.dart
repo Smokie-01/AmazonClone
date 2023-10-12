@@ -34,12 +34,6 @@ class AuthServices {
                 .read<AuthProvider>()
                 .updateVerificationID(verifID: verificationID);
             context.read<AuthProvider>().updatePhoneNumber(phoneNo: mobileNo);
-            Navigator.push(
-              context,
-              PageTransition(
-                  child: OTPScreen(mobileNumber: mobileNo),
-                  type: PageTransitionType.leftToRight),
-            );
           },
           codeAutoRetrievalTimeout: (String verificationID) {});
     } catch (e) {
